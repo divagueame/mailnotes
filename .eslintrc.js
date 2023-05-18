@@ -12,6 +12,9 @@ module.exports = {
   plugins: [
     'jest'
   ],
-  // add your custom rules here
-  rules: {}
+  rules: {
+    'no-console': 'warn',
+    'no-debugger': 'warn',
+    'no-alert': 'warn'
+  }
 }

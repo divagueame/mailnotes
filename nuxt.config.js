@@ -25,7 +25,9 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
-
+  router: {
+    middleware: ['auth']
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
   ],
@@ -33,22 +35,31 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    '@nuxt/typescript-build'
-  ],
-
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxt/typescript-build',
+    '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
+    ['@nuxtjs/eslint-module', { /* module options */ }]
   ],
-
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/'
+    baseURL: 'https://beta.mailbutler.io/api/v2'
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/users/login', method: 'post' },
+          refresh: { url: '/users/login', method: 'post' },
+          logout: false,
+          user: false
+        }
+      }
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
