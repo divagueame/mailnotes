@@ -30,5 +30,14 @@ export function notesApi () {
     }
   }
 
+  async function deleteNote (note: Note): Promise<boolean> {
+    try {
+      await $axios.$delete(`/notes/${note.id}`)
+      return true
+    } catch (error) {
+      throw new Error('Failed to create notes')
+    }
+  }
 
-  return { getNotes, createNote, updateNote }
+  return { getNotes, createNote, updateNote, deleteNote }
+}

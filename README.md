@@ -40,3 +40,6 @@ Render a component with a textarea for each note, and update the note when focus
 
 ## 8 - Create AddNoteForm component and add createNote to notesApi ##
 Add a form to create a new note for the selected email
+
+## 9 - Add deleteNote() to notesApi and add remove button ##
+Add a button to remove a note

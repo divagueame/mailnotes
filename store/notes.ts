@@ -19,6 +19,14 @@ export const useNotesStore = defineStore('notes', {
         this.notes.push(note)
       }
     },
+    deleteNote (deletedNote: Note): void {
+      if (this.notes === null) { return }
+
+      const index = this.notes.findIndex(note => note.id === deletedNote.id)
+      if (index !== -1) {
+        this.notes.splice(index, 1)
+      }
+    }
 
   }
 })
