@@ -25,3 +25,6 @@ Add nuxtjs/auth-next to handle auth logic through middleware. If user is not log
 
 ## 3 - Show user status on navbar ##
 Basic setup of the navbar showing the user auth status
+
+## 4 - Types for notes && emails  ##
+Adding types according to the openapi specs
