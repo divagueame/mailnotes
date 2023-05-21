@@ -15,4 +15,12 @@ export function notesApi () {
   }
 
 
-  return { getNotes }
+  async function updateNote (note: Note) : Promise<Note> {
+    try {
+      return await $axios.$patch(`/notes/${note.id}`, note)
+    } catch (error) {
+      throw new Error('Failed to create notes')
+    }
+  }
+
+  return { getNotes, updateNote }

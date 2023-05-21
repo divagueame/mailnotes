@@ -34,3 +34,6 @@ Add Pinia keep the state of the notes we'll retrieve from the server
 
 ## 6 - Setup notesApi and render getNotes ##
 Add a Api composition to keep all API requests to /notes. Retrieve the notes of currently selected email, add them to useNotesStore and display them on template.
+
+## 7 - Render a textarea  for each note and add updateNote on notesApi ##
+Render a component with a textarea for each note, and update the note when focus is changed. PATCH request on notesApi /notes/{note_id}.

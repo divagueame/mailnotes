@@ -1,5 +1,7 @@
 <template>
-  <pre>{{ notes }}</pre>
+    <div v-for="note in notes" :key="note.id" class="note">
+      <EditNoteForm :note="note" />
+    </div>
 </template>
 
 <script lang="ts">
