@@ -31,3 +31,6 @@ Adding types according to the openapi specs
 
 ## 5 - Setup Pinia and NotesStore ##
 Add Pinia keep the state of the notes we'll retrieve from the server 
+
+## 6 - Setup notesApi and render getNotes ##
+Add a Api composition to keep all API requests to /notes. Retrieve the notes of currently selected email, add them to useNotesStore and display them on template.
