@@ -8,4 +8,17 @@ export const useNotesStore = defineStore('notes', {
       notes: null as Note[] | null
     }
   },
+  actions: {
+    setNotes (notes: Note[]): void {
+      this.notes = notes
+    },
+    addNoteToStore (note: Note): void {
+      if (this.notes === null) {
+        this.notes = [note]
+      } else {
+        this.notes.push(note)
+      }
+    },
+
+  }
 })

@@ -14,6 +14,13 @@ export function notesApi () {
     }
   }
 
+  async function createNote (note: Note) : Promise<Note> {
+    try {
+      return await $axios.$post('/notes', note)
+    } catch (error) {
+      throw new Error('Failed to create notes')
+    }
+  }
 
   async function updateNote (note: Note) : Promise<Note> {
     try {
@@ -23,4 +30,5 @@ export function notesApi () {
     }
   }
 
-  return { getNotes, updateNote }
+
+  return { getNotes, createNote, updateNote }

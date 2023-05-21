@@ -37,3 +37,6 @@ Add a Api composition to keep all API requests to /notes. Retrieve the notes of 
 
 ## 7 - Render a textarea  for each note and add updateNote on notesApi ##
 Render a component with a textarea for each note, and update the note when focus is changed. PATCH request on notesApi /notes/{note_id}.
+
+## 8 - Create AddNoteForm component and add createNote to notesApi ##
+Add a form to create a new note for the selected email
