@@ -43,3 +43,10 @@ Add a form to create a new note for the selected email
 
 ## 9 - Add deleteNote() to notesApi and add remove button ##
 Add a button to remove a note
+
+## 10 - Toggle AddNoteForm + Simple template + Basic styling ##
+Add a ref to toggle the AddNoteForm and a few styling changes.
+
+
+## Demos ##
+![Demo GIF](./demo/create-delete-update-notes.gif)

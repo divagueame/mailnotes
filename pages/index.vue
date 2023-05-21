@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-root">
     <AddNoteForm :email-id="selectedEmailId" />
     <div v-for="note in notes" :key="note.id" class="note">
       <EditNoteForm :note="note" />
@@ -17,6 +17,7 @@ import { Email, Note } from '~/types/notes'
 
 export default defineComponent({
   name: 'IndexPage',
+  layout: 'simple',
   setup () {
     const selectedEmailId = '<38u3o5ooooadulm49pir@convertkit-mail2.com>'
     const notesStore = useNotesStore()

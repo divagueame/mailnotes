@@ -1,6 +1,19 @@
 <template>
-  <form>
-    <textarea v-model="noteText" rows="1" @blur="submitForm" />
+  <form id="add-note-form">
+    <div
+      id="add-trigger"
+      :class="{ 'active': addFormActive }"
+      @click="addFormActive = !addFormActive"
+    >
+      <img
+        src="~/static/add.svg"
+        alt="Add note"
+        role="presentation"
+        focusable="false"
+      >
+      Add a note
+    </div>
+    <textarea v-model="noteText" rows="1" :class="{ 'active': addFormActive }" @blur="submitForm" />
   </form>
 </template>
 
@@ -35,43 +48,45 @@ export default defineComponent({
       const res = await createNote(note)
       notesStore.addNoteToStore(res)
       noteText.value = ''
+      addFormActive.value = false
     }
 
-    return { noteText, submitForm }
+    const addFormActive = ref(false)
+
+    return { noteText, submitForm, addFormActive }
   }
 })
 </script>
 
 <style lang="scss">
 
-textarea {
-  resize: none;
-  &.auto {
-      overflow-y: hidden;
+form#add-note-form {
+  #add-trigger {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background-color: rgb(250, 178, 71);
+    padding: 3px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    &:hover {
+      opacity: .8;
+      cursor: pointer;
+    }
+    &.active {
+      opacity: .4;
+    }
+    img {
+      width: 20px;
+      height: 20px;
+      opacity: 1;
+    }
   }
-}
-
-textarea {
-  -webkit-appearance: none;
-  box-sizing: border-box;
-  outline: none;
-  width: 100%;
-  font-size: 14px;
-  font-family: 'Inter';
-  line-height: 22px;
-  padding: 16px 50px 16px 20px;
-  border-radius: 15px;
-  color: #404660;
-  border: none;
-  background: #fff;
-  transition: box-shadow .25s;
-  box-shadow: inset 0 0 0 1px var(--border-color, #E1E6F9), 0 0 0 3px var(--focus-color, transparent);
-  &:focus {
-     --focus-color: #ECEFFC;
-  }
-  &:focus,
-  &:hover {
-      --border-color: #BBC1E1;
+  textarea {
+    display: none;
+    &.active {
+      display: block;
+    }
   }
 }
 </style>

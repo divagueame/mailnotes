@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="login-page" class="page-root">
     <form @submit.prevent="userLogin">
       <div>
         <label>Username</label>
@@ -24,6 +24,8 @@ import { defineComponent, useContext } from '@nuxtjs/composition-api'
 import { LoginData } from '~/types/auth'
 
 export default defineComponent({
+  name: 'LoginPage',
+  layout: 'simple',
   setup () {
     const { $auth } = useContext()
     const login: LoginData = {
@@ -45,3 +47,22 @@ export default defineComponent({
 })
 
 </script>
+<style lang="scss">
+main {
+  #login-page {
+    margin-top: 100px;
+    form {
+      max-width: 350px;
+      display: block;
+      margin: 0 auto;
+      button {
+        width: 100%;
+      }
+      input[type=text] {
+        width: 100%;
+      }
+    }
+  }
+
+}
+</style>

@@ -15,3 +15,8 @@
 export default {
 }
 </script>
+<style lang="scss">
+header {
+  padding: 10px;
+}
+</style>
