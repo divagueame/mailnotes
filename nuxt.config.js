@@ -42,8 +42,7 @@ export default {
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    '@nuxtjs/auth-next',
+    '@pinia/nuxt',
     ['@nuxtjs/eslint-module', { /* module options */ }]
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios

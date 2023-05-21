@@ -28,3 +28,6 @@ Basic setup of the navbar showing the user auth status
 
 ## 4 - Types for notes && emails  ##
 Adding types according to the openapi specs
+
+## 5 - Setup Pinia and NotesStore ##
+Add Pinia keep the state of the notes we'll retrieve from the server 
