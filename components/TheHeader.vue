@@ -1,9 +1,11 @@
 <template>
   <header>
-    <h1>Auth status: {{ $auth.loggedIn }}</h1>
     <nav>
-      <ul>
-        <li><a href="/">Home</a></li>
+      <ul v-if="$auth.loggedIn">
+        <NuxtLink to="/">Home</NuxtLink>
+      </ul>
+      <ul v-else>
+        <NuxtLink to="/login">Log in</NuxtLink>
       </ul>
     </nav>
   </header>

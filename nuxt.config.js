@@ -37,6 +37,8 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/auth-next',
     '@nuxt/typescript-build',
     '@nuxtjs/composition-api/module',
     // https://go.nuxtjs.dev/axios
@@ -46,15 +48,13 @@ export default {
   ],
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: 'https://beta.mailbutler.io/api/v2'
   },
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: '/users/login', method: 'post' },
-          refresh: { url: '/users/login', method: 'post' },
+          login: { url: '/users/login', method: 'post', propertyName: 'token' },
           logout: false,
           user: false
         }

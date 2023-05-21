@@ -22,3 +22,6 @@ Create new nuxt app
 
 ## 2 - Setup Nuxtjs/Auth ##
 Add nuxtjs/auth-next to handle auth logic through middleware. If user is not logged in, he'll be redirected to /login
+
+## 3 - Show user status on navbar ##
+Basic setup of the navbar showing the user auth status

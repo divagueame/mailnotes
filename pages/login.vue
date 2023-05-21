@@ -34,6 +34,7 @@ export default defineComponent({
     const userLogin = async () => {
       try {
         await $auth.loginWith('local', { data: login })
+        $auth.redirect('home')
       } catch (err) {}
     }
     return {
