@@ -22,13 +22,13 @@
 import { defineComponent, PropType } from 'vue'
 import { ref } from '@nuxtjs/composition-api'
 import { notesApi } from '~/compositions/notesApi'
-import { Note } from '~/types/notes'
+import { Email, Note } from '~/types/notes'
 import { useNotesStore } from '~/store/notes'
 
 export default defineComponent({
   props: {
-    emailId: {
-      type: String as PropType<string>,
+    email: {
+      type: Object as PropType<Email>,
       required: true
     }
   },
@@ -42,7 +42,7 @@ export default defineComponent({
       const note: Note = {
         text: noteText.value,
         context: {
-          message_id: props.emailId
+          message_id: props.email.identifiers.message_id
         }
       }
       const res = await createNote(note)

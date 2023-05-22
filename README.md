@@ -1,12 +1,18 @@
-# mailnotes
+# Mailnotes
+A client app to read emails and the attached notes. It allows to login through the corresponding API endpoints, read emails, read, edit, delete their notes as well as as adding new notes to any email.
 
-## Build Setup
+### Stack  ###
+Nuxt 2
+Vue 2
+Nuxt/Auth
+Axios
+Pinia
+
+### Build Setup
 
 ```bash
-# install dependencies
+# To run it locally:
 $ yarn install
-
-# serve with hot reload at localhost:3000
 $ yarn dev
 
 # build for production and launch server
@@ -17,36 +23,44 @@ $ yarn start
 $ yarn generate
 ```
 
-## 1 - Start ##
+### 1 - Start ###
 Create new nuxt app
 
-## 2 - Setup Nuxtjs/Auth ##
+### 2 - Setup Nuxtjs/Auth ###
 Add nuxtjs/auth-next to handle auth logic through middleware. If user is not logged in, he'll be redirected to /login
 
-## 3 - Show user status on navbar ##
+### 3 - Show user status on navbar ###
 Basic setup of the navbar showing the user auth status
 
-## 4 - Types for notes && emails  ##
+### 4 - Types for notes && emails  ###
 Adding types according to the openapi specs
 
-## 5 - Setup Pinia and NotesStore ##
+### 5 - Setup Pinia and NotesStore ###
 Add Pinia keep the state of the notes we'll retrieve from the server 
 
-## 6 - Setup notesApi and render getNotes ##
+### 6 - Setup notesApi and render getNotes ###
 Add a Api composition to keep all API requests to /notes. Retrieve the notes of currently selected email, add them to useNotesStore and display them on template.
 
-## 7 - Render a textarea  for each note and add updateNote on notesApi ##
+### 7 - Render a textarea  for each note and add updateNote on notesApi ###
 Render a component with a textarea for each note, and update the note when focus is changed. PATCH request on notesApi /notes/{note_id}.
 
-## 8 - Create AddNoteForm component and add createNote to notesApi ##
+### 8 - Create AddNoteForm component and add createNote to notesApi ###
 Add a form to create a new note for the selected email
 
-## 9 - Add deleteNote() to notesApi and add remove button ##
+### 9 - Add deleteNote() to notesApi and add remove button ###
 Add a button to remove a note
 
-## 10 - Toggle AddNoteForm + Simple template + Basic styling ##
+### 10 - Toggle AddNoteForm + Simple template + Basic styling ###
 Add a ref to toggle the AddNoteForm and a few styling changes.
 
+### 11 - Get emails and select an active email ###
+Remove hardcoded selected email and fetch current emails.
+Add activeEmail to know which one is the currently selected email.
+Add utils composition with buildUrlQuery to able to pass an object to build queries. Update getNotes to use buildUrlQuery.
 
-## Demos ##
-![Demo GIF](./demo/create-delete-update-notes.gif)
+### Demos ###
+#### Commit 10 ###
+![Demo GIF](./demo/10-create-delete-update-notes.gif)
+
+#### Commit 11 ###
+![Demo GIF](./demo/11-emails-notes.gif)

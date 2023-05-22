@@ -24,6 +24,8 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    '~/assets/simple.css',
+    '~/assets/main.scss'
   ],
   router: {
     middleware: ['auth']

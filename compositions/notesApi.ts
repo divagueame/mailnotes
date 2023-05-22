@@ -1,14 +1,17 @@
 import { useContext } from '@nuxtjs/composition-api'
 import { Note } from '~/types/notes'
+import { utils } from '~/compositions/utils'
+import { Params } from '~/types/utils'
 
 export function notesApi () {
   const { $axios } = useContext()
 
-  async function getNotes (messageIds:String[]) : Promise<Note[]> {
+  async function getNotes (params?: Params) : Promise<Note[]> {
+    const { buildUrlQuery } = utils()
+    const url = buildUrlQuery('/notes', params)
+
     try {
-      const queryParams = messageIds.map(id => `message_ids[]=${id}`).join('&')
-      // /notes?message_ids[]=<38u3o5ooooadulm49pir@convertkit-mail2.com>&page=1&per_page=50
-      return await $axios.$get(`/notes?${queryParams}`)
+      return await $axios.$get(url)
     } catch (error) {
       throw new Error('Failed to fetch notes')
     }

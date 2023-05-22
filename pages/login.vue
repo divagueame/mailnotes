@@ -7,7 +7,7 @@
       </div>
       <div>
         <label>Password</label>
-        <input v-model="login.password" type="text">
+        <input v-model="login.password" type="password">
       </div>
       <div>
         <button type="submit">
@@ -58,7 +58,8 @@ main {
       button {
         width: 100%;
       }
-      input[type=text] {
+      input[type=text],
+      input[type=password] {
         width: 100%;
       }
     }
