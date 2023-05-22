@@ -1,7 +1,12 @@
 <template>
   <div class="page-root">
     <ul class="emails">
-      <li v-for="email in emails" :key="email.id" @click="changeActiveEmail(email)">
+      <li
+        v-for="email in emails"
+        :key="email.id"
+        :class="{ active: email.id === activeEmail?.id }"
+        @click="changeActiveEmail(email)"
+      >
         <img
           src="~/static/email.svg"
           alt="Email"
@@ -113,12 +118,19 @@ ul.emails {
   font-size: 12px;
   margin-bottom: 25px;
   li {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(118, 118, 118, 0.24);
-    border-left: 2px solid rgb(238, 118, 48);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.08), 0 1px 1px rgba(118, 118, 118, 0.12);
+    border-left: 2px solid rgb(255, 222, 203);
     padding: 5px 5px;
     margin: 7px auto;
-    &:hover {
+    color: rgb(51, 51, 51);
+    &.active, &.active:hover {
+      color: rgb(0, 0, 0);
       border-left: 2px solid rgb(240, 147, 93);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(118, 118, 118, 0.24);
+    }
+    &:hover {
+
+      border-left: 2px solid rgb(241, 212, 110);
       cursor: pointer;
       color: rgb(83, 83, 83)
     }

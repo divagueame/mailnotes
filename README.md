@@ -58,9 +58,22 @@ Remove hardcoded selected email and fetch current emails.
 Add activeEmail to know which one is the currently selected email.
 Add utils composition with buildUrlQuery to able to pass an object to build queries. Update getNotes to use buildUrlQuery.
 
+### 12 - Improve add note UI/UX ###
+Add autoExpandTextarea functionality for new notes textarea
+Add discard note and save buttons
+Add styling for active email
+
 ### Demos ###
 #### Commit 10 ###
 ![Demo GIF](./demo/10-create-delete-update-notes.gif)
 
 #### Commit 11 ###
 ![Demo GIF](./demo/11-emails-notes.gif)
+
+#### Commit 12 ###
+Save and discard
+![Demo GIF](./demo/12-add-notes-ui-ux.gif)
+New note autoresize
+![Demo GIF](./demo/12-add-notes-autoresize.gif)
+
+
