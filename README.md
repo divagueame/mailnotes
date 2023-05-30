@@ -77,7 +77,9 @@ While data is being fetch, a loader is shown
 Load Office add-in dependencies on head tag and initialize before Nuxt app, add manifest.xml and icon assets.
 This site is being server from Github pages, some configuration is added for deployment on nuxt.config.
 
-
+### 15 - Refactor to use Office context mailbox ###
+Remove Emails from getEmails to use Office.context item instead where the sidepanel opens.
+Add suggestion to add new note when there are no notes
 
 ### Demos ###
 #### Commit 10 ###
@@ -98,4 +100,6 @@ New note autoresize
 #### Commit 14 ###
 ![Demo GIF](./demo/14-sidepanel-outlook.gif)
 
+#### Commit 15 ###
+![Demo GIF](./demo/15-sidepanel-add-and-reload-note.gif)
 

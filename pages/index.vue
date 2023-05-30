@@ -4,25 +4,22 @@
     <h2>Ooops... Please, try loading this add-in on Microsoft Outlook.</h2>
   </div>
   <div v-else class="page-root">
-    <ul class="emails">
-      <li
-        v-for="email in emails"
-        :key="email.id"
-        :class="{ active: email.id === activeEmail?.id }"
-        @click="changeActiveEmail(email)"
-      >
+    <template v-if="activeEmail !== null">
+      <AddNoteForm :email="activeEmail" />
+      <div v-if="notes?.length === 0">
+        <h2>You have no notes yet. Why not add one now?</h2>
+      </div>
+      <div v-for="note in notes" v-else :key="note.id" class="note">
+        <EditNoteForm :note="note" />
         <img
-          src="~/static/email.svg"
-          alt="Email"
+          src="~/static/delete.svg"
+          alt="Delete note"
+          role="presentation"
+          focusable="false"
+          @click="handleDeleteNote(note)"
         >
-        {{ email.meta.sender?.email ? email.meta.sender?.email : 'Unknown sender' }} {{ email.meta.subject ? email.meta.subject : 'No subject' }}
-      </li>
-    </ul>
-    <AddNoteForm v-if="activeEmail !== null" :email="activeEmail" />
-    <div v-for="note in notes" :key="note.id" class="note">
-      <EditNoteForm :note="note" />
-      <img src="~/static/delete.svg" alt="Delete note" role="presentation" focusable="false" @click="handleDeleteNote(note)">
-    </div>
+      </div>
+    </template>
   </div>
 </template>
 
@@ -41,52 +38,43 @@ export default defineComponent({
   setup () {
     const isLoading: Ref<boolean> = ref(false)
     const isOutlookContext: Ref<boolean> = ref(false)
+    const activeEmailId: Ref<string | null> = ref(null)
+    const activeEmail: Ref<Email | null> = ref(null)
     const notesStore = useNotesStore()
 
     window.Office.onReady(() => {
-      if (window?.Office?.context !== undefined) {
+      if (window?.Office?.context?.mailbox?.item !== undefined) {
         isOutlookContext.value = true
+      }
+      if (window?.Office?.context?.mailbox?.item?.internetMessageId !== undefined) {
+        activeEmailId.value = window.Office.context.mailbox.item.internetMessageId
       }
     })
 
+    const { getEmail } = emailsApi()
     const { getNotes, deleteNote } = notesApi()
 
-    const { getEmails } = emailsApi()
-    const emails: Ref<Email[]> = ref([])
-    const activeEmail: Ref<Email | null> = ref(null)
-    const changeActiveEmail = (email: Email) => {
-      activeEmail.value = email
-    }
-    const fetchEmails = async () => {
-      const emailsParams: Params = { page: 1, per_page: 5 }
-      const res = await getEmails(emailsParams)
-      emails.value = res
-    }
-
-    fetchEmails()
-
-    watch(activeEmail, async (newActiveEmail) => {
-      if (newActiveEmail) {
-        const emailId = newActiveEmail.identifiers?.message_id
-        if (emailId) {
-          await fetchNotes()
-        }
+    watch(activeEmailId, async (newActiveEmailId) => {
+      if (newActiveEmailId !== null) {
+        isLoading.value = true
+        await fetchNotes()
+        const emailResponse = await getEmail(newActiveEmailId)
+        activeEmail.value = emailResponse
+        isLoading.value = false
       }
     })
 
     const notes = ref(notesStore.notes)
     const fetchNotes = async () => {
-      isLoading.value = true
-      if (!activeEmail.value?.identifiers.message_id) {
+      if (!activeEmailId.value) {
         notes.value = []
         return
       }
-      const messageIds: Params = { 'message_ids[]': activeEmail.value?.identifiers.message_id }
+      const messageIds: Params = { 'message_ids[]': activeEmailId.value }
 
-      const fetchedNotes: Note[] = await getNotes(messageIds)
+      const fetchedNotes:Note[] = await getNotes(messageIds)
       notesStore.setNotes(fetchedNotes)
       notes.value = fetchedNotes
-      isLoading.value = false
     }
 
     const handleDeleteNote = async (note: Note) => {
