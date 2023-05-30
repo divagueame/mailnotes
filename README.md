@@ -3,10 +3,17 @@ A client app to read emails and the attached notes. It allows to login through t
 
 ### Stack  ###
 Nuxt 2
+
 Vue 2
+
 Nuxt/Auth
+
 Axios
+
 Pinia
+
+### Outlook Add-in Manifest ###
+https://divagueame.github.io/mailnotes/manifest.xml
 
 ### Build Setup
 
@@ -66,6 +73,11 @@ Add styling for active email
 ### 13 - Add loading component ###
 While data is being fetch, a loader is shown
 
+### 14 - Load Office, manifest.xml, icons ###
+Load Office add-in dependencies on head tag and initialize before Nuxt app, add manifest.xml and icon assets.
+This site is being server from Github pages, some configuration is added for deployment on nuxt.config.
+
+
 
 ### Demos ###
 #### Commit 10 ###
@@ -82,5 +94,8 @@ New note autoresize
 
 #### Commit 13 ###
 ![Demo GIF](./demo/13-loader.gif)
+
+#### Commit 14 ###
+![Demo GIF](./demo/14-sidepanel-outlook.gif)
 
 

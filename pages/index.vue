@@ -1,5 +1,8 @@
 <template>
   <LoadingWrapper v-if="isLoading" />
+  <div v-else-if="!isOutlookContext">
+    <h2>Ooops... Please, try loading this add-in on Microsoft Outlook.</h2>
+  </div>
   <div v-else class="page-root">
     <ul class="emails">
       <li
@@ -37,7 +40,14 @@ export default defineComponent({
   layout: 'simple',
   setup () {
     const isLoading: Ref<boolean> = ref(false)
+    const isOutlookContext: Ref<boolean> = ref(false)
     const notesStore = useNotesStore()
+
+    window.Office.onReady(() => {
+      if (window?.Office?.context !== undefined) {
+        isOutlookContext.value = true
+      }
+    })
 
     const { getNotes, deleteNote } = notesApi()
 
@@ -93,7 +103,8 @@ export default defineComponent({
       changeActiveEmail,
       notes,
       handleDeleteNote,
-      isLoading
+      isLoading,
+      isOutlookContext
     }
   }
 })

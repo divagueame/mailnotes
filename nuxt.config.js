@@ -7,7 +7,7 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'mailnotes',
+    title: 'Mailnotes',
     htmlAttrs: {
       lang: 'en'
     },
@@ -28,10 +28,12 @@ export default {
     '~/assets/main.scss'
   ],
   router: {
+    base: '/mailnotes',
     middleware: ['auth']
   },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: 'plugins/office.js', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -65,5 +67,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  generate: {
+    dir: 'docs',
+    fallback: true
   }
 }
