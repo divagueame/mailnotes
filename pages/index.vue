@@ -1,5 +1,6 @@
 <template>
-  <div class="page-root">
+  <LoadingWrapper v-if="isLoading" />
+  <div v-else class="page-root">
     <ul class="emails">
       <li
         v-for="email in emails"
@@ -35,6 +36,7 @@ export default defineComponent({
   name: 'IndexPage',
   layout: 'simple',
   setup () {
+    const isLoading: Ref<boolean> = ref(false)
     const notesStore = useNotesStore()
 
     const { getNotes, deleteNote } = notesApi()
@@ -64,15 +66,17 @@ export default defineComponent({
 
     const notes = ref(notesStore.notes)
     const fetchNotes = async () => {
+      isLoading.value = true
       if (!activeEmail.value?.identifiers.message_id) {
         notes.value = []
         return
       }
       const messageIds: Params = { 'message_ids[]': activeEmail.value?.identifiers.message_id }
 
-      const fetchedNotes:Note[] = await getNotes(messageIds)
+      const fetchedNotes: Note[] = await getNotes(messageIds)
       notesStore.setNotes(fetchedNotes)
       notes.value = fetchedNotes
+      isLoading.value = false
     }
 
     const handleDeleteNote = async (note: Note) => {
@@ -88,7 +92,8 @@ export default defineComponent({
       emails,
       changeActiveEmail,
       notes,
-      handleDeleteNote
+      handleDeleteNote,
+      isLoading
     }
   }
 })

@@ -63,6 +63,10 @@ Add autoExpandTextarea functionality for new notes textarea
 Add discard note and save buttons
 Add styling for active email
 
+### 13 - Add loading component ###
+While data is being fetch, a loader is shown
+
+
 ### Demos ###
 #### Commit 10 ###
 ![Demo GIF](./demo/10-create-delete-update-notes.gif)
@@ -75,5 +79,8 @@ Save and discard
 ![Demo GIF](./demo/12-add-notes-ui-ux.gif)
 New note autoresize
 ![Demo GIF](./demo/12-add-notes-autoresize.gif)
+
+#### Commit 13 ###
+![Demo GIF](./demo/13-loader.gif)
 
 
