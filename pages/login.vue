@@ -1,5 +1,9 @@
 <template>
-  <div id="login-page" class="page-root">
+  <div id="login-page" class="page-root card">
+    <h1>
+      <img src="~/static/assets/icon.svg" alt="MailNotes">
+      MailNotes
+    </h1>
     <form @submit.prevent="userLogin">
       <div>
         <label>Username</label>
@@ -11,7 +15,7 @@
       </div>
       <div>
         <button type="submit">
-          Submit
+          Sign in
         </button>
       </div>
     </form>
@@ -51,19 +55,40 @@ export default defineComponent({
 main {
   #login-page {
     margin-top: 100px;
+
+    h1 {
+      color: rgb(43, 43, 43);
+      width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 15%;
+
+      img {
+        max-width: 60px;
+      }
+    }
+
     form {
       max-width: 350px;
       display: block;
       margin: 0 auto;
+
       button {
         width: 100%;
       }
+
       input[type=text],
       input[type=password] {
         width: 100%;
       }
+
+      label {
+        font-size: 12px;
+        color: rgb(41, 41, 41);
+      }
     }
   }
-
 }
 </style>

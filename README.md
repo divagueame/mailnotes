@@ -81,6 +81,9 @@ This site is being server from Github pages, some configuration is added for dep
 Remove Emails from getEmails to use Office.context item instead where the sidepanel opens.
 Add suggestion to add new note when there are no notes
 
+### 16 - Restyle login & Fallback messages ###
+
+
 ### Demos ###
 #### Commit 10 ###
 ![Demo GIF](./demo/10-create-delete-update-notes.gif)
@@ -102,4 +105,5 @@ New note autoresize
 
 #### Commit 15 ###
 ![Demo GIF](./demo/15-sidepanel-add-and-reload-note.gif)
+![Demo GIF](./demo/15-different-emails-different-notes.gif)
 

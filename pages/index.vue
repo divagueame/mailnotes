@@ -1,13 +1,26 @@
 <template>
   <LoadingWrapper v-if="isLoading" />
   <div v-else-if="!isOutlookContext">
-    <h2>Ooops... Please, try loading this add-in on Microsoft Outlook.</h2>
+    <div class="card">
+      <a href="https://www.outlook.com">
+        <img
+          src="~/static/outlook.svg"
+          alt="MailNotes"
+        >
+      </a>
+      <h2>Ooops... Please, try loading this add-in on Microsoft Outlook.</h2>
+      <a href="https://www.outlook.com">
+        Open Outlook
+      </a>
+    </div>
   </div>
   <div v-else class="page-root">
     <template v-if="activeEmail !== null">
       <AddNoteForm :email="activeEmail" />
       <div v-if="notes?.length === 0">
-        <h2>You have no notes yet. Why not add one now?</h2>
+        <div class="card">
+          <h2>You have no notes yet. Why not add one now?</h2>
+        </div>
       </div>
       <div v-for="note in notes" v-else :key="note.id" class="note">
         <EditNoteForm :note="note" />
@@ -71,8 +84,12 @@ export default defineComponent({
         return
       }
       const messageIds: Params = { 'message_ids[]': activeEmailId.value }
-
-      const fetchedNotes:Note[] = await getNotes(messageIds)
+      let fetchedNotes:Note[]
+      try {
+        fetchedNotes = await getNotes(messageIds)
+      } catch (e) {
+        fetchedNotes = []
+      }
       notesStore.setNotes(fetchedNotes)
       notes.value = fetchedNotes
     }
@@ -114,33 +131,15 @@ export default defineComponent({
     }
   }
 }
-ul.emails {
-  list-style: none;
-  height: 200px;
-  overflow-y: auto;
-  padding: 10px;
-  font-size: 12px;
-  margin-bottom: 25px;
-  li {
-    box-shadow: 0 1px 1px rgba(0,0,0,0.08), 0 1px 1px rgba(118, 118, 118, 0.12);
-    border-left: 2px solid rgb(255, 222, 203);
-    padding: 5px 5px;
-    margin: 7px auto;
-    color: rgb(51, 51, 51);
-    &.active, &.active:hover {
-      color: rgb(0, 0, 0);
-      border-left: 2px solid rgb(240, 147, 93);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(118, 118, 118, 0.24);
-    }
+.card {
+  a {
+    padding: 8px 60px;
+    border-radius: 10px;
     &:hover {
-
-      border-left: 2px solid rgb(241, 212, 110);
-      cursor: pointer;
-      color: rgb(83, 83, 83)
+      opacity: .9;
     }
     img {
-      width: 12px;
-      height: 12px;
+      max-width: 150px;
     }
   }
 }
